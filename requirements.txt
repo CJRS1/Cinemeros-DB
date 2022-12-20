@@ -9,13 +9,11 @@ django-rest-framework==0.1.0
 djangorestframework==3.14.0
 djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==5.2.2
-dotenv==0.0.5
 ez-setup==0.9
 Flask==2.2.2
 Flask-MySQLdb==1.0.1
 itsdangerous==2.1.2
 Jinja2==3.1.2
-load-dotenv==0.1.0
 MarkupSafe==2.1.1
 mysql-connector-python==8.0.31
 mysqlclient==2.1.1
