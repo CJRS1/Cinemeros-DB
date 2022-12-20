@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-v0hdz-y3g$$$3j*an71ymg&*-#!eb5_nma$b&pr$1wh#f$+t#)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cinemerosdb.herokuapp.com']
 
 
 # Application definition
