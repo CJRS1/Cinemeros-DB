@@ -8,6 +8,8 @@ urlpatterns=[
     path('salas/',RegistroSalaApiView.as_view()),
     path('registro/<int:pk>',RegistroUpdateApiView.as_view()),
 
+    path('salas/<int:pk>',SalaDeleteApiView.as_view()),
+
     path('salas/<int:pk>',SalaUpdateApiView.as_view()),
     
     path('asientos/',RegistroAsientoApiView.as_view()),

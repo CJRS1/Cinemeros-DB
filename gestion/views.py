@@ -36,26 +36,26 @@ class RegistroUsuarioApiView(ListCreateAPIView):
     
 
     def get(self,request:Request):
-        usuarios = UsuarioModel.objects.filter(tipoUsuario="USER").all()
-        usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
-        return Response(data={
-            'message':'Los usuarios tipo USER son:',
-            'content': usuarios_serializados.data
-        })
-    def get(self,request:Request):
-        usuarios = UsuarioModel.objects.filter(tipoUsuario="ADMIN").all()
-        usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
-        return Response(data={
-            'message':'Los usuarios tipo ADMIN son:',
-            'content': usuarios_serializados.data
-        })
-    def get(self,request:Request):
-        usuarios = self.get_queryset()
-        usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
-        return Response(data={
-            'message':'Los usuarios son:',
-            'content': usuarios_serializados.data
-        })
+            usuarios = UsuarioModel.objects.filter(tipoUsuario="USER").all()
+            usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
+            return Response(data={
+                'message':'Los usuarios tipo USER son:',
+                'content': usuarios_serializados.data
+            })
+    # def get(self,request:Request):
+    #     usuarios = UsuarioModel.objects.filter(tipoUsuario="ADMIN").all()
+    #     usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
+    #     return Response(data={
+    #         'message':'Los usuarios tipo ADMIN son:',
+    #         'content': usuarios_serializados.data
+    #     })
+    # def get(self,request:Request):
+    #     usuarios = self.get_queryset()
+    #     usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
+    #     return Response(data={
+    #         'message':'Los usuarios son:',
+    #         'content': usuarios_serializados.data
+    #     })
 
 class RegistroUpdateApiView(UpdateAPIView):
     queryset = UsuarioModel.objects.all()
@@ -64,6 +64,7 @@ class RegistroUpdateApiView(UpdateAPIView):
 class RegistroCineApiView(ListCreateAPIView):
     queryset = CineModel.objects.all()
     serializer_class = CineSerializer
+    permission_classes = [SoloAdmin]
 
     def post(self,request:Request):
         data = self.serializer_class(data=request.data)
@@ -84,6 +85,7 @@ class RegistroCineApiView(ListCreateAPIView):
 class RegistroSalaApiView(CreateAPIView):
     queryset = SalaModel.objects.all()
     serializer_class = SalaSerializer
+    permission_classes = [SoloAdmin]
 
     def post(self,request:Request):
         data = self.serializer_class(data=request.data)
@@ -108,6 +110,7 @@ class SalaUpdateApiView(UpdateAPIView):
 class SalaDeleteApiView(DestroyAPIView):
     queryset = SalaModel.objects.all()
     serializer_class = SalaSerializer
+    permission_classes=[SoloAdmin]
 
 class RegistroAsientoApiView(ListCreateAPIView):
     queryset = AsientoModel.objects.all()

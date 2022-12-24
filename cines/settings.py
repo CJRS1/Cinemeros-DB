@@ -28,12 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v0hdz-y3g$$$3j*an71ymg&*-#!eb5_nma$b&pr$1wh#f$+t#)'
-
+# SECRET_KEY = 'django-insecure-v0hdz-y3g$$$3j*an71ymg&*-#!eb5_nma$b&pr$1wh#f$+t#)'
+SECRET_KEY = environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cinemerosdb.herokuapp.com']
+# ALLOWED_HOSTS = ['cinemerosdb.herokuapp.com']
 
 
 # Application definition
@@ -85,23 +85,17 @@ WSGI_APPLICATION = 'cines.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': environ.get('DB_NAME'),
-#         'USER': environ.get('DB_USER'),
-#         'PASSWORD': environ.get('DB_PASSWORD'),
-#         'HOST': environ.get('DB_HOST'),
-#         'PORT': environ.get('DB_PORT')
-#     }
-# }
-
 DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': environ.get('DB_NAME'),
+        'USER': environ.get('DB_USER'),
+        'PASSWORD': environ.get('DB_PASSWORD'),
+        'HOST': environ.get('DB_HOST'),
+        'PORT': environ.get('DB_PORT')
+    }
 }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
