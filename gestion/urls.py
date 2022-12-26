@@ -6,11 +6,13 @@ urlpatterns=[
     path('registro/',RegistroUsuarioApiView.as_view()),
     path('cines/',RegistroCineApiView.as_view()),
     path('salas/',RegistroSalaApiView.as_view()),
-    path('registro/<int:pk>',RegistroUpdateApiView.as_view()),
+
+    path('registross/<int:pk>',RegistroUpdateApiView.as_view()),
 
     path('salas/<int:pk>',SalaDeleteApiView.as_view()),
+    path('salass/',ListarSalasApiView.as_view()),
 
-    path('salas/<int:pk>',SalaUpdateApiView.as_view()),
+    path('salasss/<int:pk>',SalaUpdateApiView.as_view()),
     
     path('asientos/',RegistroAsientoApiView.as_view()),
     path('asientos-toggle/<str:id>',AsientoToggleApiView.as_view()),

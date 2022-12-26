@@ -17,9 +17,10 @@ class UsuarioModel(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active=models.BooleanField(default=True)
     createdAt=models.DateTimeField(auto_now_add=True,db_column='created_at')
+    
     objects = UsuarioManager()
     USERNAME_FIELD='correo'
-    REQUIRED_FIELDS=['nombre','apellido','tipoUsuario']
+    REQUIRED_FIELDS=['nombre','apellido','tipoUsuario','password']
 
     class Meta: 
         db_table = 'usuarios'

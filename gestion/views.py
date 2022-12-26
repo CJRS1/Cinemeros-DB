@@ -1,4 +1,5 @@
 from rest_framework.generics import CreateAPIView, ListCreateAPIView, UpdateAPIView, DestroyAPIView, ListAPIView
+from rest_framework.mixins import UpdateModelMixin
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
@@ -35,20 +36,20 @@ class RegistroUsuarioApiView(ListCreateAPIView):
             },status=status.HTTP_201_CREATED)
     
 
+    # def get(self,request:Request):
+    #         usuarios = UsuarioModel.objects.filter(tipoUsuario="USER").all()
+    #         usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
+    #         return Response(data={
+    #             'message':'Los usuarios tipo USER son:',
+    #             'content': usuarios_serializados.data
+    #         })
     def get(self,request:Request):
-            usuarios = UsuarioModel.objects.filter(tipoUsuario="USER").all()
+            usuarios = UsuarioModel.objects.filter(tipoUsuario="ADMIN").all()
             usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
             return Response(data={
-                'message':'Los usuarios tipo USER son:',
+                'message':'Los usuarios tipo ADMIN son:',
                 'content': usuarios_serializados.data
             })
-    # def get(self,request:Request):
-    #     usuarios = UsuarioModel.objects.filter(tipoUsuario="ADMIN").all()
-    #     usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
-    #     return Response(data={
-    #         'message':'Los usuarios tipo ADMIN son:',
-    #         'content': usuarios_serializados.data
-    #     })
     # def get(self,request:Request):
     #     usuarios = self.get_queryset()
     #     usuarios_serializados = self.serializer_class(instance=usuarios, many = True)
@@ -81,6 +82,18 @@ class RegistroCineApiView(ListCreateAPIView):
             'message':'Los cines son:',
             'content': cines_serializados.data
         })
+
+class ListarSalasApiView(ListCreateAPIView):
+    queryset = SalaModel.objects.all()
+    serializer_class = SalaSerializer
+
+    def get(self,request:Request):
+            salas = SalaModel.objects.filter(cantAsientos__lt=3,cantAsientos__gt=1).all()
+            salas_serializados = self.serializer_class(instance=salas, many = True)
+            return Response(data={
+                'message':'Las salas con mayor cantidad de asiento son:',
+                'content': salas_serializados.data
+            })
 
 class RegistroSalaApiView(CreateAPIView):
     queryset = SalaModel.objects.all()
