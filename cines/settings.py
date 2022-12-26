@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-v0hdz-y3g$$$3j*an71ymg&*-#!eb5_nma$b&pr$1wh#f$+t#)'
-SECRET_KEY = environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-v0hdz-y3g$$$3j*an71ymg&*-#!eb5_nma$b&pr$1wh#f$+t#)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,6 +95,7 @@ DATABASES = {
         'PORT': environ.get('DB_PORT')
     }
 }
+
 
 
 # Password validation
@@ -152,6 +153,8 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'id_del_usuario'
 }
 
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5500','https://www.google.com']
+CORS_ALLOW_METHODS=['GET','POST','PUT']
+
 
 STATIC_ROOT = BASE_DIR / 'archivos'

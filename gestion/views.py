@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import UsuarioModel,SalaModel,CineModel,AsientoModel
-from .serializers import UsuarioSerializer,SalaSerializer,CineSerializer,AsientoSerializer
+from .serializers import UsuarioSerializer,SalaSerializer,CineSerializer,AsientoSerializer, UsuarioUPSerializer
 from .permissions import SoloAdmin
 
 class RegistroUsuarioApiView(ListCreateAPIView):
@@ -60,7 +60,7 @@ class RegistroUsuarioApiView(ListCreateAPIView):
 
 class RegistroUpdateApiView(UpdateAPIView):
     queryset = UsuarioModel.objects.all()
-    serializer_class = UsuarioSerializer
+    serializer_class = UsuarioUPSerializer
 
 class RegistroCineApiView(ListCreateAPIView):
     queryset = CineModel.objects.all()

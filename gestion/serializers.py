@@ -22,6 +22,26 @@ class UsuarioSerializer(serializers.ModelSerializer):
             }
         }
 
+class UsuarioUPSerializer(serializers.ModelSerializer):
+
+    def update(self,instance,validated_data):
+
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
+
+    class Meta:
+        fields = '__all__'
+        model = UsuarioModel
+        extra_kwargs={
+            'password':{
+                'write_only':True
+            },
+            'id':{
+                'read_only':True
+            }
+        }
+
 class CineSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
