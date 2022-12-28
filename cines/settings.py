@@ -154,10 +154,10 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'id_del_usuario'
 }
 
-JWT_SECRET_KEY="some_random_string"
 
 CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5500','https://www.google.com']
 CORS_ALLOW_METHODS=['GET','POST','PUT']
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_ROOT = BASE_DIR / 'archivos'

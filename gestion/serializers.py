@@ -1,4 +1,4 @@
-from .models import UsuarioModel,CineModel,SalaModel,AsientoModel
+from .models import UsuarioModel,CineModel,SalaModel,AsientoModel, PeliculaModel
 from rest_framework import serializers
 
 
@@ -66,6 +66,16 @@ class AsientoSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = AsientoModel
+        extra_kwargs={
+            'id':{
+                'read_only':True
+            }
+        }
+
+class PeliculaSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+        model = PeliculaModel
         extra_kwargs={
             'id':{
                 'read_only':True

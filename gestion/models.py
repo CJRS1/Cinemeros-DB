@@ -34,12 +34,20 @@ class CineModel(models.Model):
     class Meta:
         db_table='cines'
 
+class PeliculaModel(models.Model):
+    id = models.AutoField(primary_key=True,null=False,unique=True)
+    peliculas = models.CharField(max_length=50,unique=True)
+    fechaCreacion = models.DateTimeField(auto_now_add=True,db_column='fecha_creacion',null=False)
+
+    class Meta:
+        db_table='peliculas'
+
 class SalaModel(models.Model):
     id = models.AutoField(primary_key=True,null=False,unique=True)
     id_sala = models.CharField(max_length=10,unique=True,null=False)
     cantAsientos = models.IntegerField(null=False)
     duracion = models.TimeField(null=False)
-    pelicula = models.CharField(max_length=50)
+    id_pelicula = models.ForeignKey(PeliculaModel,to_field='id',on_delete=models.CASCADE)
     cine = models.ForeignKey(CineModel,to_field='id',on_delete=models.CASCADE)
 
     class Meta:
@@ -54,3 +62,4 @@ class AsientoModel(models.Model):
 
     class Meta:
         db_table='asientos'
+

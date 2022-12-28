@@ -6,8 +6,8 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from .models import UsuarioModel,SalaModel,CineModel,AsientoModel
-from .serializers import UsuarioSerializer,SalaSerializer,CineSerializer,AsientoSerializer, UsuarioUPSerializer
+from .models import UsuarioModel,SalaModel,CineModel,AsientoModel,PeliculaModel
+from .serializers import UsuarioSerializer,SalaSerializer,CineSerializer,AsientoSerializer, UsuarioUPSerializer,PeliculaSerializer
 from .permissions import SoloAdmin
 
 class RegistroUsuarioApiView(ListCreateAPIView):
@@ -189,3 +189,37 @@ class VistaProtegidaApiView(ListAPIView):
                 {'id':request.user.id,
                 'correo':request.user.correo}
         })
+
+class RegistroPeliculaApiView(CreateAPIView):
+    queryset = PeliculaModel.objects.all()
+    serializer_class = PeliculaSerializer
+
+    # def post(self,request:Request):
+    #     data = self.serializer_class(data=request.data)
+    #     data.is_valid(raise_exception=True)
+    #     nuevoCine=data.save()
+    #     return Response(data={
+    #         'message':'Pelicula creada exitosamente',
+    #         'content': self.serializer_class(instance=nuevoCine).data
+    #     })
+
+
+    def post(self, request: Request):
+        informacion = self.serializer_class(data=request.data)
+
+        es_valida=informacion.is_valid()
+
+        if not es_valida:
+            return Response(data={
+                'message':'Error al crear usuario',
+                'content':informacion.errors
+            },status=status.HTTP_400_BAD_REQUEST)
+        
+        else:
+            nuevoUsuario = informacion.save()
+            nuevoUsuarioSerializado = self.serializer_class(instance=nuevoUsuario)
+
+            return Response(data={
+                'message':'Película creada exitosamente',
+                'content': nuevoUsuarioSerializado.data
+            },status=status.HTTP_201_CREATED)

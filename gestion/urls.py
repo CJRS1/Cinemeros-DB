@@ -19,4 +19,7 @@ urlpatterns=[
     
     path('iniciar-sesion/',TokenObtainPairView.as_view()),
     path('sala-protegido/',VistaProtegidaApiView.as_view()),
+
+    path('pelicula/',RegistroPeliculaApiView.as_view()),
+    
 ]
