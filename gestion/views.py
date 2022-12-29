@@ -142,8 +142,8 @@ class AsientoToggleApiView(UpdateAPIView):
     queryset = AsientoModel.objects.all()
     serializer_class = AsientoSerializer
 
-    def put(self,request:Request,id:str):
-        asientoEncontrado = AsientoModel.objects.filter(id=id).first()
+    def put(self,request:Request,id_asiento:str):
+        asientoEncontrado = AsientoModel.objects.filter(id_asiento=id_asiento).first()
 
         if asientoEncontrado is None:
             return Response(data={
@@ -168,7 +168,7 @@ class AsientoDisponibleApiView(ListCreateAPIView):
         asientos_serializados = self.serializer_class(instance=asientos,many=True)
 
         return Response(data={
-            'message':'Los platos son:',
+            'message':'Los asientos son:',
             'content': asientos_serializados.data
         })
     
@@ -223,3 +223,15 @@ class RegistroPeliculaApiView(CreateAPIView):
                 'message':'Película creada exitosamente',
                 'content': nuevoUsuarioSerializado.data
             },status=status.HTTP_201_CREATED)
+
+class ListarAsientoApiView(ListCreateAPIView):
+    queryset = AsientoModel.objects.all()
+    serializer_class = AsientoSerializer
+
+    def get(self,request:Request):
+            asientos = self.get_queryset()
+            asiento_serializados = self.serializer_class(instance=asientos, many = True)
+            return Response(data={
+                'message':'Los cines son:',
+                'content': asiento_serializados.data
+        })

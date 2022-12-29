@@ -15,7 +15,8 @@ urlpatterns=[
     path('salasss/<int:pk>',SalaUpdateApiView.as_view()),
     
     path('asientos/',RegistroAsientoApiView.as_view()),
-    path('asientos-toggle/<str:id>',AsientoToggleApiView.as_view()),
+    path('asientos-toggle/<str:id_asiento>',AsientoToggleApiView.as_view()),
+    path('Lasientos/',ListarAsientoApiView.as_view()),
     
     path('iniciar-sesion/',TokenObtainPairView.as_view()),
     path('sala-protegido/',VistaProtegidaApiView.as_view()),
